@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbCalendarRange } from '@nebular/theme';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 
 @Component({
@@ -14,9 +15,12 @@ export class DashboardComponent implements OnInit {
     end: undefined
   }
 
-  constructor() { }
+  results: any = [];
+
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    this.results = this.dashboardService.getResults()
   }
 
   clearDateRangePicker() {
@@ -33,5 +37,4 @@ export class DashboardComponent implements OnInit {
   onDateRangeChange(value: any) {
     console.log(value)
   }
-
 }
