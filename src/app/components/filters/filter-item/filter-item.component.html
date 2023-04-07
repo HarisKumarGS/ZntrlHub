@@ -1,0 +1,32 @@
+<div>
+    <div class="bottom-margin" *ngIf="currentIndex && currentIndex > 0">
+        <nb-select class="select-min-width" size="small" placeholder="Select" [(selected)]="groupConditionsSelecteditem" shape="round" class="">
+            <nb-option *ngFor="let item of groupConditions" [value]="item.value">{{item.text}}</nb-option>
+        </nb-select>
+    </div>
+    <div>
+        <nb-select size="small" placeholder="Select" [(selected)]="baseSelectedItem">
+            <nb-option *ngFor="let item of baseFilter" [value]="item.value">{{item.text}}</nb-option>
+        </nb-select>
+        <span class="spacing">
+            {{filterText[baseSelectedItem]}}
+        </span>
+        <span *ngIf="baseSelectedItem === 'PAGE'">
+            <nb-select size="small" placeholder="Select"></nb-select>
+        </span>
+        <span *ngIf="baseSelectedItem === 'TIME_SPENT'">
+            <nb-select size="small" placeholder="Select" [(selected)]="timeSpentConditionsSelectedItem">
+                <nb-option *ngFor="let item of timeSpentConditions" [value]="item.value">{{item.text}}</nb-option>
+            </nb-select>
+            <input class="spacing" nbInput placeholder="10" fieldSize="small">
+            <nb-select size="small" placeholder="Select" [(selected)]="timeUnitSelectedItem">
+                <nb-option *ngFor="let item of timeUnitsText" [value]="item.value">{{item.text}}</nb-option>
+            </nb-select>
+        </span>
+        <span *ngIf="baseSelectedItem === 'BUTTON_CLICK'">
+            <nb-select size="small" placeholder="Select">
+            </nb-select>
+        </span>
+        <button size="small" nbButton ghost status="danger" (click)="onRemoveFilter()"><nb-icon icon="close-circle-outline"></nb-icon></button>
+    </div>
+</div>

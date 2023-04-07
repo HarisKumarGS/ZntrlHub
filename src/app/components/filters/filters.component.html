@@ -1,0 +1,11 @@
+<div>
+    <div class="filter-margin" *ngFor="let filter of filters; let i = index">
+        <app-filter-item [currentIndex]="i" (removeEvent)="removeFilter($event)"></app-filter-item>
+    </div>
+    <div *ngIf="filters.length < 3">
+        <button size="tiny" nbButton outline status="success" (click)="addNewFilter()"><nb-icon icon="plus-outline"></nb-icon>Add Filter</button>
+    </div>
+    <div *ngIf="filters.length > 0" class="filter-button-margin">
+        <button nbButton status="success">Apply</button>
+    </div>
+</div>
