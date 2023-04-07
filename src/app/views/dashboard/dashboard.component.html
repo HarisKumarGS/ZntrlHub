@@ -1,0 +1,25 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <div class="filter-card-header ">
+                FILTERS
+                <div>
+                    <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker" [(ngModel)]="range">
+                    <nb-rangepicker #formpicker (rangeChange)="onDateRangeChange($event)"></nb-rangepicker>
+                    <button *ngIf="checkIfDateRangePresent()" nbButton ghost status="danger" (click)="clearDateRangePicker()"><nb-icon icon="close-circle-outline"></nb-icon></button>
+                </div>
+            </div>
+        </nb-card-header>
+        <nb-card-body>
+          Card
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <nb-card-header>
+            RESULTS
+        </nb-card-header>
+        <nb-card-body>
+          Card
+        </nb-card-body>
+    </nb-card>
+</div>
