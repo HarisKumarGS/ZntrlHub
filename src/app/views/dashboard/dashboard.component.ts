@@ -10,8 +10,8 @@ import { NbCalendarRange } from '@nebular/theme';
 export class DashboardComponent implements OnInit {
 
   range: NbCalendarRange<any> = {
-    start: new Date(),
-    end: new Date()
+    start: undefined,
+    end: undefined
   }
 
   constructor() { }
