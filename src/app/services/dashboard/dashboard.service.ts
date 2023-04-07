@@ -6,6 +6,8 @@ import { MOCK_RESULTS } from 'src/app/constants/mock';
 })
 export class DashboardService {
 
+  isLoading: boolean = false;
+
   constructor() { }
 
   getResults() {
