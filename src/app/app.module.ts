@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbUserModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './components/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HeaderComponent } from './components/header/header.component';
     NbDatepickerModule.forRoot(),
     NbLayoutModule,
     NbEvaIconsModule,
-    NbUserModule
+    NbUserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

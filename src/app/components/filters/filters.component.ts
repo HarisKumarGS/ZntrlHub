@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BASE_FILTERS } from 'src/app/constants/filters';
 import { convertObjectToDropdownArray } from 'src/app/shared/utils/typeConversion';
 
@@ -8,6 +8,8 @@ import { convertObjectToDropdownArray } from 'src/app/shared/utils/typeConversio
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
+
+  @Output() applyFilters = new EventEmitter<any>();
 
   filters: any = [];
 
@@ -32,6 +34,10 @@ export class FiltersComponent implements OnInit {
 
   onUpdate(event: any) {
     this.filters[event.currentIndex] = event.filterDetails;
+  }
+
+  onApply() {
+    this.applyFilters.emit(this.filters)
   }
 
 }

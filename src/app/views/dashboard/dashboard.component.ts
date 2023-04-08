@@ -20,7 +20,9 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.results = this.dashboardService.getResults()
+    this.dashboardService.getButtonsEvents()
+    this.dashboardService.getPagesEvents()
+    this.getResults()
   }
 
   clearDateRangePicker() {
@@ -36,5 +38,15 @@ export class DashboardComponent implements OnInit {
 
   onDateRangeChange(value: any) {
     console.log(value)
+  }
+
+  getResults(event: any = []) {
+    let filterArray = event;
+    filterArray?.forEach((_item: any, index: string | number) => {
+      filterArray[index].precedence = index
+    })
+    this.dashboardService.getResults(filterArray, this.range.start, this.range.end).subscribe((results) => {
+      this.results = results
+    })
   }
 }

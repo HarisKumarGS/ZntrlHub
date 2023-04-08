@@ -6,6 +6,6 @@
         <button size="tiny" nbButton outline status="success" (click)="addNewFilter()"><nb-icon icon="plus-outline"></nb-icon>Add Filter</button>
     </div>
     <div *ngIf="filters.length > 0" class="filter-button-margin">
-        <button nbButton status="success">Apply</button>
+        <button nbButton status="success" (click)="onApply()">Apply</button>
     </div>
 </div>

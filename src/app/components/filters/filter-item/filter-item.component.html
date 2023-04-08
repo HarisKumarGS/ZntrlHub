@@ -1,6 +1,6 @@
 <div>
     <div class="bottom-margin" *ngIf="currentIndex && currentIndex > 0">
-        <nb-select class="select-min-width" size="small" placeholder="Select" [(selected)]="filterDetails.group"  shape="round" (selectedChange)="onGroupConditionChange($event)">
+        <nb-select status="success" size="small" class="select-min-width" size="small" placeholder="Select" [(selected)]="filterDetails.group"  shape="round" (selectedChange)="onGroupConditionChange($event)">
             <nb-option *ngFor="let item of groupConditions" [value]="item.value">{{item.text}}</nb-option>
         </nb-select>
     </div>
@@ -12,7 +12,9 @@
             {{filterText[baseSelectedItem]}}
         </span>
         <span *ngIf="filterDetails.filter === 'PAGE'">
-            <nb-select size="small" placeholder="Select" [(selected)]="filterDetails.value" (selectedChange)="onValueChange($event)"></nb-select>
+            <nb-select size="small" placeholder="Select" [(selected)]="filterDetails.value" (selectedChange)="onValueChange($event)">
+                <nb-option *ngFor="let item of pages | async" [value]="item">{{item}}</nb-option>
+            </nb-select>
         </span>
         <span *ngIf="filterDetails.filter === 'TIME_SPENT'">
             <nb-select size="small" placeholder="Select" [(selected)]="filterDetails.condition" (selectedChange)="onConditionChange($event)">
@@ -24,7 +26,9 @@
             </nb-select>
         </span>
         <span *ngIf="filterDetails.filter === 'BUTTON_CLICK'">
-            <nb-select size="small" placeholder="Select" [(selected)]="filterDetails.value" (selectedChange)="onValueChange($event)"></nb-select>
+            <nb-select size="small" placeholder="Select" [(selected)]="filterDetails.value" (selectedChange)="onValueChange($event)">
+                <nb-option *ngFor="let item of buttons | async" [value]="item">{{item}}</nb-option>
+            </nb-select>
         </span>
         <button size="small" nbButton ghost status="danger" (click)="onRemoveFilter()"><nb-icon icon="close-circle-outline"></nb-icon></button>
     </div>

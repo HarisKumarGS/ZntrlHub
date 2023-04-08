@@ -11,7 +11,7 @@
             </div>
         </nb-card-header>
         <nb-card-body>
-            <app-filters></app-filters>
+            <app-filters (applyFilters)="getResults($event)"></app-filters>
         </nb-card-body>
     </nb-card>
     <nb-card accent="success">

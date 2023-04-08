@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BASE_FILTERS, FILTER_TEXT, GROUP_CONDITIONS, TIME_SPENT_CONDITIONS, TIME_UNITS } from 'src/app/constants/filters';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { convertObjectToDropdownArray } from 'src/app/shared/utils/typeConversion';
 
 @Component({
@@ -23,8 +24,10 @@ export class FilterItemComponent implements OnInit {
   timeUnitSelectedItem = convertObjectToDropdownArray(TIME_UNITS)[0].value
   groupConditions = convertObjectToDropdownArray(GROUP_CONDITIONS);
   groupConditionsSelecteditem = convertObjectToDropdownArray(GROUP_CONDITIONS)[0].value
+  buttons = this.dashboardService.getButtons()
+  pages = this.dashboardService.getPages()
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
   }
