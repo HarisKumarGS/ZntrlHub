@@ -49,4 +49,12 @@ export class DashboardComponent implements OnInit {
       this.results = results
     })
   }
+
+  onExport(event: any = []) {
+    let filterArray = event;
+    filterArray?.forEach((_item: any, index: string | number) => {
+      filterArray[index].precedence = index
+    })
+    this.dashboardService.exportResults(filterArray, this.range.start, this.range.end)
+  }
 }

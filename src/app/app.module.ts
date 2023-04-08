@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbUserModule, NbDatepickerModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbUserModule, NbDatepickerModule, NbToastrModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'corporate' }),
     NbDatepickerModule.forRoot(),
+    NbToastrModule.forRoot(),
     NbLayoutModule,
     NbEvaIconsModule,
     NbUserModule,

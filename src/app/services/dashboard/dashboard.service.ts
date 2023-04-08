@@ -3,6 +3,7 @@ import { MOCK_RESULTS } from 'src/app/constants/mock';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,7 @@ export class DashboardService {
 
   results = new BehaviorSubject(MOCK_RESULTS);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastrService: NbToastrService) { }
 
   getResults(event: any, rangeStart: any, rangeEnd: any) {
     // if (rangeStart !== undefined && rangeEnd !== undefined) {
@@ -25,6 +26,14 @@ export class DashboardService {
     //   console.log(rangeEnd.getTime()/1000)
     // }
     return this.results
+  }
+
+  exportResults(event: any, rangeStart: any, rangeEnd: any) {
+    console.log('Export')
+    this.toastrService.show(
+      'Please check your google drive',
+      'Results are being exported',
+      { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });
   }
 
   getButtons(): Observable<any> {
