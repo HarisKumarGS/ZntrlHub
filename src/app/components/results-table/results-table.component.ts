@@ -12,6 +12,7 @@ export class ResultsTableComponent implements OnInit {
   results = this.dashboardService.getResultsResponse() || 0
   totalCount = this.dashboardService.getTotalResults() || 0
   pageSize = this.dashboardService.resultsPerPage;
+  currentPage = this.dashboardService.getCurrentPageObservable()
   
   displayedColumns: string[] = ['pageTitle', 'pageUrl', 'location', 'timezone', 'device_type', 'browser_name', 'dateTime'];
 

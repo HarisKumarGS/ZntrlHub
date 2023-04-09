@@ -57,6 +57,10 @@ export class DashboardService {
     return this.totalResults
   }
 
+  getCurrentPageObservable() {
+    return this.currentPage
+  }
+
   getCurrentPage() {
     return this.currentPage.value
   }

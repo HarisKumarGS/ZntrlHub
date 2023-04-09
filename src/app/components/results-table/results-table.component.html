@@ -35,6 +35,7 @@
         [length]="totalCount|async"
         [pageSize]="pageSize"
         (page)="onPageChange($event)"
+        [pageIndex]="currentPage|async"
         aria-label="Select page">
     </mat-paginator>
 </div>
