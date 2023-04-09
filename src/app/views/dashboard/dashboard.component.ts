@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NbCalendarRange } from '@nebular/theme';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 
@@ -10,31 +9,46 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  range: NbCalendarRange<any> = {
-    start: undefined,
-    end: undefined
-  }
-
-  results: any = [];
+  range = this.dashboardService.getRange()
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.results = this.dashboardService.getResults()
+    this.dashboardService.getButtonsEvents()
+    this.dashboardService.getPagesEvents()
+    this.getResults()
   }
 
   clearDateRangePicker() {
-    this.range = {
+    this.dashboardService.updateRange({
       start: undefined,
       end: undefined
-    }
+    })
+    this.dashboardService.updateCurrentPage(0)
+    this.dashboardService.getResults()
   }
 
   checkIfDateRangePresent() {
-    return this.range.start !== undefined || this.range.end !== undefined
+    return this.dashboardService.getRangeResolved().start !== undefined || this.dashboardService.getRangeResolved().end !== undefined
   }
 
   onDateRangeChange(value: any) {
-    console.log(value)
+    this.dashboardService.updateRange(value)
+    this.dashboardService.updateCurrentPage(0)
+    this.dashboardService.getResults()
+  }
+
+  getResults(event: any = []) {
+    let filterArray = event;
+    filterArray?.forEach((_item: any, index: string | number) => {
+      filterArray[index].precedence = index
+    })
+    this.dashboardService.updateEvent(filterArray);
+    this.dashboardService.updateCurrentPage(0)
+    this.dashboardService.getResults()
+  }
+
+  onExport() {
+    this.dashboardService.exportResults()
   }
 }

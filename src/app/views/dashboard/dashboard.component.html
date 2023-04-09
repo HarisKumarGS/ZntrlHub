@@ -4,19 +4,22 @@
             <div class="filter-card-header ">
                 FILTERS
                 <div>
-                    <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker" [(ngModel)]="range">
+                    <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker" [ngModel]="range|async" fieldSize="small">
                     <nb-rangepicker #formpicker (rangeChange)="onDateRangeChange($event)"></nb-rangepicker>
-                    <button *ngIf="checkIfDateRangePresent()" nbButton ghost status="danger" (click)="clearDateRangePicker()"><nb-icon icon="close-circle-outline"></nb-icon></button>
+                    <button size="small" *ngIf="checkIfDateRangePresent()" nbButton ghost status="danger" (click)="clearDateRangePicker()"><nb-icon icon="close-circle-outline"></nb-icon></button>
                 </div>
             </div>
         </nb-card-header>
         <nb-card-body>
-          Card
+            <app-filters (applyFilters)="getResults($event)"></app-filters>
         </nb-card-body>
     </nb-card>
-    <nb-card>
+    <nb-card accent="success">
         <nb-card-body class="table-card-padding-0">
-            <app-results-table [results]="results"></app-results-table>
+            <app-results-table></app-results-table>
+            <div class="export-button-margin">
+                <button nbButton status="success" (click)="onExport()">Export</button>
+            </div>
         </nb-card-body>
     </nb-card>
 </div>
