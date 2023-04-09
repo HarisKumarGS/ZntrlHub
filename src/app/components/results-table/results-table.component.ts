@@ -14,7 +14,7 @@ export class ResultsTableComponent implements OnInit {
   pageSize = this.dashboardService.resultsPerPage;
   currentPage = this.dashboardService.getCurrentPageObservable()
   
-  displayedColumns: string[] = ['pageTitle', 'pageUrl', 'location', 'timezone', 'device_type', 'browser_name', 'dateTime'];
+  displayedColumns: string[] = ['pageTitle', 'pageUrl','timeStayed', 'buttonClick', 'location', 'timezone', 'device_type', 'browser_name', 'dateTime'];
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -28,6 +28,18 @@ export class ResultsTableComponent implements OnInit {
   onPageChange(event: any) {
     this.dashboardService.updateCurrentPage(event.pageIndex)
     this.dashboardService.getResults()
+  }
+
+  getButtonClicked(element: any) {
+    if(element && element.button_clicked && element.button_clicked.flag && element.button_clicked.button_name) {
+      return element.button_clicked.button_name
+    } else {
+      return '-'
+    }
+  }
+
+  stringToNumber(value: any) {
+    return parseFloat(value).toFixed(2);
   }
 
 }
