@@ -1,5 +1,13 @@
 <div>
     <table class="table-width-full" mat-table [dataSource]="results|async">
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.customerdetails.cust_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="whatsappNumber">
+            <th mat-header-cell *matHeaderCellDef>Whatsapp Number</th>
+            <td mat-cell *matCellDef="let element">{{element.customerdetails.wa_number}}</td>
+        </ng-container>
         <ng-container matColumnDef="pageTitle">
             <th mat-header-cell *matHeaderCellDef>Page Title</th>
             <td mat-cell *matCellDef="let element"> {{element.page_name}} </td>

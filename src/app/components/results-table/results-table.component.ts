@@ -14,7 +14,7 @@ export class ResultsTableComponent implements OnInit {
   pageSize = this.dashboardService.resultsPerPage;
   currentPage = this.dashboardService.getCurrentPageObservable()
   
-  displayedColumns: string[] = ['pageTitle', 'pageUrl','timeStayed', 'buttonClick', 'location', 'timezone', 'device_type', 'browser_name', 'dateTime'];
+  displayedColumns: string[] = ['customer', 'whatsappNumber' ,'pageTitle', 'pageUrl','timeStayed', 'buttonClick', 'location', 'timezone', 'device_type', 'browser_name', 'dateTime'];
 
   constructor(private dashboardService: DashboardService) { }
 
