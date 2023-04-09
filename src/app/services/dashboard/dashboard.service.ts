@@ -112,5 +112,25 @@ export class DashboardService {
       'Will be Downloaded in sometime',
       'Results are being exported',
       { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });
+    
+    let baseUrl = `${environment.apiUrl}/analytics/export?page=${this.currentPage.value}&resultsPerPage=${this.resultsPerPage}`;
+
+    if(this.range.value.start !== undefined && this.range.value.end !== undefined) {
+      let startDate = new Date(Date.parse(this.range.value.start!)).toISOString()
+      let endDate = new Date(Date.parse(this.range.value.end!)).toISOString()
+      baseUrl = `${baseUrl}&date_gte=${startDate}&date_lte=${endDate}`
+    }
+
+    this.http.post(baseUrl, this.event.value, {
+      responseType: 'text'
+    }).subscribe((response: any) => {
+      const url = window.URL.createObjectURL(new Blob([response]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Reports.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    })
   }
 }
