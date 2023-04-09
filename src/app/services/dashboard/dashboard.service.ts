@@ -11,29 +11,54 @@ export class DashboardService {
 
   isButtonsLoading = new BehaviorSubject(false);
   isPagesLoading = new BehaviorSubject(false);
-  isFiltersLoading = new BehaviorSubject(false);
+  isResultsLoading = new BehaviorSubject(false);
 
   buttons = new BehaviorSubject([]);
   pages = new BehaviorSubject([]);
 
-  results = new BehaviorSubject(MOCK_RESULTS);
+  results = new BehaviorSubject([]);
+  currentPage = new BehaviorSubject(0);
+  totalResults = new BehaviorSubject(0);
+  resultsPerPage = 10;
+
+  event = new BehaviorSubject([]);
+  range = new BehaviorSubject({
+    start: undefined,
+    end: undefined
+  });
 
   constructor(private http: HttpClient, private toastrService: NbToastrService) { }
 
-  getResults(event: any, rangeStart: any, rangeEnd: any) {
-    // if (rangeStart !== undefined && rangeEnd !== undefined) {
-    //   console.log(rangeStart.getTime()/1000)
-    //   console.log(rangeEnd.getTime()/1000)
-    // }
-    return this.results
+  updateEvent(value: any) {
+    this.event.next(value)
   }
 
-  exportResults(event: any, rangeStart: any, rangeEnd: any) {
-    console.log('Export')
-    this.toastrService.show(
-      'Please check your google drive',
-      'Results are being exported',
-      { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });
+  updateRange(value: any) {
+    this.range.next(value);
+  }
+
+  updateCurrentPage(value: any) {
+    this.currentPage.next(value);
+  }
+
+  getEvent(): Observable<any> {
+    return this.event
+  }
+
+  getRangeResolved() {
+    return this.range.value;
+  }
+
+  getRange(): Observable<any> {
+    return this.range
+  }
+
+  getTotalResults(): Observable<any> {
+    return this.totalResults
+  }
+
+  getCurrentPage() {
+    return this.currentPage.value
   }
 
   getButtons(): Observable<any> {
@@ -42,6 +67,10 @@ export class DashboardService {
 
   getPages(): Observable<any> {
     return this.pages
+  }
+
+  getResultsResponse(): Observable<any> {
+    return this.results
   }
 
   getButtonsEvents() {
@@ -58,5 +87,30 @@ export class DashboardService {
       this.pages.next(response.results)
       this.isPagesLoading.next(false)
     })
+  }
+
+  getResults() {
+
+    this.isResultsLoading.next(true)
+    let baseUrl = `${environment.apiUrl}/analytics?page=${this.currentPage.value}&resultsPerPage=${this.resultsPerPage}`;
+
+    if(this.range.value.start !== undefined && this.range.value.end !== undefined) {
+      let startDate = new Date(Date.parse(this.range.value.start!)).toISOString()
+      let endDate = new Date(Date.parse(this.range.value.end!)).toISOString()
+      baseUrl = `${baseUrl}&date_gte=${startDate}&date_lte=${endDate}`
+    }
+
+    this.http.post(baseUrl, this.event.value).subscribe((response: any) => {
+      this.results.next(response.results)
+      this.totalResults.next(response.count)
+      this.isResultsLoading.next(false)
+    })
+  }
+
+  exportResults() {
+    this.toastrService.show(
+      'Will be Downloaded in sometime',
+      'Results are being exported',
+      { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });
   }
 }

@@ -10,6 +10,7 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ResultsTableComponent } from 'src/app/components/results-table/results-table.component';
 import { FiltersComponent } from 'src/app/components/filters/filters.component';
 import { FilterItemComponent } from 'src/app/components/filters/filter-item/filter-item.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FilterItemComponent } from 'src/app/components/filters/filter-item/filt
     NbIconModule,
     FormsModule,
     MatTableModule,
+    MatPaginatorModule,
     NbSelectModule
   ],
   providers: [

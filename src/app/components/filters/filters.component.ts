@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BASE_FILTERS } from 'src/app/constants/filters';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { convertObjectToDropdownArray } from 'src/app/shared/utils/typeConversion';
 
 @Component({
@@ -13,7 +14,7 @@ export class FiltersComponent implements OnInit {
 
   filters: any = [];
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
   }
@@ -30,6 +31,10 @@ export class FiltersComponent implements OnInit {
 
   removeFilter(key: Number) {
     this.filters.splice(key, 1);
+    if (this.filters.length === 0) {
+      this.dashboardService.updateCurrentPage(0)
+      this.dashboardService.getResults()
+    }
   }
 
   onUpdate(event: any) {

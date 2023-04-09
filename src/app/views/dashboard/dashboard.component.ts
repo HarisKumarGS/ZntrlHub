@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NbCalendarRange } from '@nebular/theme';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 
@@ -10,12 +9,7 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  range: NbCalendarRange<any> = {
-    start: undefined,
-    end: undefined
-  }
-
-  results: any = [];
+  range = this.dashboardService.getRange()
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -26,18 +20,22 @@ export class DashboardComponent implements OnInit {
   }
 
   clearDateRangePicker() {
-    this.range = {
+    this.dashboardService.updateRange({
       start: undefined,
       end: undefined
-    }
+    })
+    this.dashboardService.updateCurrentPage(0)
+    this.dashboardService.getResults()
   }
 
   checkIfDateRangePresent() {
-    return this.range.start !== undefined || this.range.end !== undefined
+    return this.dashboardService.getRangeResolved().start !== undefined || this.dashboardService.getRangeResolved().end !== undefined
   }
 
   onDateRangeChange(value: any) {
-    console.log(value)
+    this.dashboardService.updateRange(value)
+    this.dashboardService.updateCurrentPage(0)
+    this.dashboardService.getResults()
   }
 
   getResults(event: any = []) {
@@ -45,16 +43,12 @@ export class DashboardComponent implements OnInit {
     filterArray?.forEach((_item: any, index: string | number) => {
       filterArray[index].precedence = index
     })
-    this.dashboardService.getResults(filterArray, this.range.start, this.range.end).subscribe((results) => {
-      this.results = results
-    })
+    this.dashboardService.updateEvent(filterArray);
+    this.dashboardService.updateCurrentPage(0)
+    this.dashboardService.getResults()
   }
 
-  onExport(event: any = []) {
-    let filterArray = event;
-    filterArray?.forEach((_item: any, index: string | number) => {
-      filterArray[index].precedence = index
-    })
-    this.dashboardService.exportResults(filterArray, this.range.start, this.range.end)
+  onExport() {
+    this.dashboardService.exportResults()
   }
 }

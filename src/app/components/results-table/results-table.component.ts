@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { formatDate } from 'src/app/shared/utils/dateFormat';
 
 @Component({
@@ -8,17 +9,24 @@ import { formatDate } from 'src/app/shared/utils/dateFormat';
 })
 export class ResultsTableComponent implements OnInit {
 
-  @Input() results: any = [];
+  results = this.dashboardService.getResultsResponse() || 0
+  totalCount = this.dashboardService.getTotalResults() || 0
+  pageSize = this.dashboardService.resultsPerPage;
   
   displayedColumns: string[] = ['pageTitle', 'pageUrl', 'location', 'timezone', 'device_type', 'browser_name', 'dateTime'];
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
   }
 
   formatDateCreated(date: any) {
     return formatDate(date)
+  }
+
+  onPageChange(event: any) {
+    this.dashboardService.updateCurrentPage(event.pageIndex)
+    this.dashboardService.getResults()
   }
 
 }
