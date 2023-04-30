@@ -51,4 +51,8 @@ export class DashboardComponent implements OnInit {
   onExport() {
     this.dashboardService.exportResults()
   }
+
+  onSave() {
+    this.dashboardService.saveResults()
+  }
 }

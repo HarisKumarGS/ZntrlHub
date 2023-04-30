@@ -137,4 +137,26 @@ export class DashboardService {
       link.remove();
     })
   }
+
+  saveResults() {
+    let baseUrl = environment.sheetsUrl;
+
+    if(this.range.value.start !== undefined && this.range.value.end !== undefined) {
+      let startDate = new Date(Date.parse(this.range.value.start!)).toISOString()
+      let endDate = new Date(Date.parse(this.range.value.end!)).toISOString()
+      baseUrl = `${baseUrl}?date_gte=${startDate}&date_lte=${endDate}`
+    }
+
+    this.http.post(baseUrl, this.event.value).subscribe((response: any) => {
+      this.toastrService.show(
+        'Please check drive folder after sometime',
+        'Results are being exported',
+        { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });  
+    }, (error) => {
+      this.toastrService.show(
+        'Please check drive folder after sometime',
+        'Results are being exported',
+        { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });  
+    })
+  }
 }
