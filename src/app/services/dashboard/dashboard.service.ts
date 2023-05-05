@@ -27,6 +27,11 @@ export class DashboardService {
     end: undefined
   });
 
+  savedSheets = new BehaviorSubject([]);
+  savedSheetsPerPage = 10;
+  totalSavedSheets = new BehaviorSubject(0);
+  currenSavedSheetstPage = new BehaviorSubject(0);
+
   constructor(private http: HttpClient, private toastrService: NbToastrService) { }
 
   updateEvent(value: any) {
@@ -39,6 +44,14 @@ export class DashboardService {
 
   updateCurrentPage(value: any) {
     this.currentPage.next(value);
+  }
+
+  updateCurrentSavedSheetsPage(value:any) {
+    this.currenSavedSheetstPage.next(value);
+  }
+
+  updateSavedSheetCurrentPage(value:any){
+    this.currenSavedSheetstPage.next(value);
   }
 
   getEvent(): Observable<any> {
@@ -61,6 +74,10 @@ export class DashboardService {
     return this.currentPage
   }
 
+  getCurrentSavedSheetsPageObservable() {
+    return this.currenSavedSheetstPage
+  }
+
   getCurrentPage() {
     return this.currentPage.value
   }
@@ -76,6 +93,16 @@ export class DashboardService {
   getResultsResponse(): Observable<any> {
     return this.results
   }
+
+  getSavedSheetsResultsResponse(): Observable<any> {
+    return this.savedSheets
+  }
+
+  getTotalSavedSheets(): Observable<any> {
+    return this.totalSavedSheets
+  }
+
+
 
   getButtonsEvents() {
     this.isButtonsLoading.next(true)
@@ -152,11 +179,22 @@ export class DashboardService {
         'Please check drive folder after sometime',
         'Results are being exported',
         { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });  
+        this.getSavedSheets()
     }, (error) => {
       this.toastrService.show(
         'Please check drive folder after sometime',
         'Results are being exported',
         { duration: 2000, position: NbGlobalPhysicalPosition.BOTTOM_RIGHT, status: 'success' });  
+        this.getSavedSheets()
+    })
+  }
+
+  getSavedSheets() {
+    let baseUrl = `${environment.apiUrl}/sheets?page=${this.currenSavedSheetstPage.value}&resultsPerPage=${this.savedSheetsPerPage}`;
+    this.currenSavedSheetstPage.next(0);
+    this.http.get(baseUrl).subscribe((response: any) => {
+      this.savedSheets.next(response.results);
+      this.totalSavedSheets.next(response.count)
     })
   }
 }

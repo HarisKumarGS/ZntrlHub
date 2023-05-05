@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getButtonsEvents()
     this.dashboardService.getPagesEvents()
     this.getResults()
+    this.getSavedSheets()
   }
 
   clearDateRangePicker() {
@@ -54,5 +55,9 @@ export class DashboardComponent implements OnInit {
 
   onSave() {
     this.dashboardService.saveResults()
+  }
+
+  getSavedSheets() {
+    this.dashboardService.getSavedSheets()
   }
 }

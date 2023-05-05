@@ -1,0 +1,22 @@
+<div>
+    <div class="bold heading-margin">SAVED SHEETS</div>
+    <table class="table-width-full" mat-table [dataSource]="results|async">
+        <ng-container matColumnDef="appliedFilters">
+            <th mat-header-cell *matHeaderCellDef>Applied Filters</th>
+            <td mat-cell *matCellDef="let element"> Cart Page and Button Click</td>
+        </ng-container>
+        <ng-container matColumnDef="Link">
+            <th mat-header-cell *matHeaderCellDef>Link</th>
+            <td mat-cell *matCellDef="let element"><a target="_blank" [href]="getSheetsLink(element.spreadsheetId)">Link</a></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator 
+        [length]="totalCount|async"
+        [pageSize]="pageSize"
+        (page)="onPageChange($event)"
+        [pageIndex]="currentPage|async"
+        aria-label="Select page">
+    </mat-paginator>
+</div>
