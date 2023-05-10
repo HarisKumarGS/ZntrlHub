@@ -5,3 +5,20 @@
     width: 140px;
     height: 100%;
 }
+.app-container {
+    height: 100vh;
+    width: 100vw;
+    overflow: scroll;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/images/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.layout-container {
+    display: block;
+    width: 100vw;
+    margin-top: 380px;
+}

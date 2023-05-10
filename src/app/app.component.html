@@ -1,3 +1,4 @@
+<div class="app-container">
 <amplify-authenticator [hideSignUp]="true">
   <ng-template amplifySlot="header">
     <div style="padding: var(--amplify-space-large); text-align: center">
@@ -13,7 +14,7 @@
     let-user="user"
     let-signOut="signOut"
   >
-    <nb-layout>
+    <nb-layout class="layout-container">
       <nb-layout-header fixed>
         <app-header class="header-component"></app-header>
       </nb-layout-header>
@@ -23,3 +24,4 @@
     </nb-layout>
   </ng-template>
 </amplify-authenticator>
+</div>
