@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { NbButtonModule, NbCardModule, NbDatepickerModule, NbIconModule, NbInputModule, NbLayoutModule, NbSelectModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDatepickerModule, NbIconModule, NbInputModule, NbLayoutModule, NbSelectModule, NbUserModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
@@ -32,7 +32,8 @@ import { SheetsTableComponent } from 'src/app/components/sheets-table/sheets-tab
     FormsModule,
     MatTableModule,
     MatPaginatorModule,
-    NbSelectModule
+    NbSelectModule,
+    NbUserModule
   ],
   providers: [
     DashboardService
