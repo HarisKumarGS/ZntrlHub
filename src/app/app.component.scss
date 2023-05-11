@@ -12,13 +12,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/images/background.jpg');
+    background-image: url('../assets/images/2971124.png');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 101%;
 }
 .layout-container {
     display: block;
     width: 100vw;
     margin-top: 380px;
+}
+.login-logo-container {
+    padding: 32px;
+    padding-bottom: 0px;
+    text-align: center;
 }
