@@ -9,7 +9,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
-
+import { AuthInterceptor } from 'src/app/interceptors/auth-interceptor.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,11 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
     NbUserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
