@@ -166,7 +166,7 @@ export class DashboardService {
   }
 
   saveResults() {
-    let baseUrl = environment.sheetsUrl;
+    let baseUrl = `${environment.apiUrl}/create`;
 
     if(this.range.value.start !== undefined && this.range.value.end !== undefined) {
       let startDate = new Date(Date.parse(this.range.value.start!)).toISOString()

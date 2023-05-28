@@ -3,10 +3,10 @@
 
 const awsmobile = {
     "aws_project_region": "ap-south-1",
-    "aws_cognito_identity_pool_id": "ap-south-1:3ea07c42-6073-418d-a7a9-6c36964e1184",
+    "aws_cognito_identity_pool_id": "ap-south-1:bf21b5bc-4751-4c86-a2c3-6b15bcb7cae2",
     "aws_cognito_region": "ap-south-1",
-    "aws_user_pools_id": "ap-south-1_PZph3wJHZ",
-    "aws_user_pools_web_client_id": "6sub4ahbuot0osadau7d3c8uf5",
+    "aws_user_pools_id": "ap-south-1_BN60xNef6",
+    "aws_user_pools_web_client_id": "88ufpvhsftq4do4lcuevvjcg1",
     "oauth": {},
     "aws_cognito_username_attributes": [
         "EMAIL"
@@ -25,7 +25,10 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
-    ]
+    ],
+    "aws_content_delivery_bucket": "analytics-20230511223139-hostingbucket-prod",
+    "aws_content_delivery_bucket_region": "ap-south-1",
+    "aws_content_delivery_url": "http://analytics-20230511223139-hostingbucket-prod.s3-website.ap-south-1.amazonaws.com"
 };
 
 
